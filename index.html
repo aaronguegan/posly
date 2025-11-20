@@ -7,7 +7,7 @@
   <meta name="description"
         content="POSLY est un logiciel de caisse moderne pensé pour les petits commerces : encaissements rapides, suivi des stocks, statistiques claires et conformité. Une solution simple, sans engagement." />
 
-  <!-- Police Inter (style proche de POSLY) -->
+  <!-- Police Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -20,7 +20,9 @@
       --text-muted: #6b7280;
       --accent: #7b5cff;
       --accent-soft: rgba(123, 92, 255, 0.12);
+      --accent-soft-strong: rgba(123, 92, 255, 0.16);
       --border-soft: #e5e7eb;
+      --border-strong: #c7d2fe;
     }
 
     * {
@@ -31,7 +33,8 @@
 
     body {
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(circle at top, #f4f3ff 0, #f9fafb 40%, #ffffff 100%);
+      background:
+        radial-gradient(circle at top, #eef2ff 0, #f9fafb 40%, #ffffff 100%);
       color: var(--text-main);
       padding: 32px;
     }
@@ -41,12 +44,33 @@
       margin: 0 auto;
     }
 
+    /* HERO */
     .hero {
       padding: 32px 24px 40px;
       border-radius: 32px;
-      background: var(--card-bg);
+      background:
+        radial-gradient(circle at top right, rgba(123, 92, 255, 0.16), transparent 55%),
+        radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.08), transparent 55%),
+        var(--card-bg);
       box-shadow: 0 24px 80px rgba(15, 23, 42, 0.16);
       border: 1px solid var(--border-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.6), transparent 60%);
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
     }
 
     .badge {
@@ -56,11 +80,21 @@
       font-weight: 600;
       padding: 4px 10px;
       border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent);
+      background: rgba(15, 23, 42, 0.75);
+      color: #e5e7eb;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       margin-bottom: 18px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(10px);
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      margin-right: 6px;
     }
 
     h1 {
@@ -129,28 +163,105 @@
       font-size: 16px;
     }
 
+    /* SECTIONS */
     .section {
-      margin-top: 40px;
-      padding: 24px 24px 28px;
+      margin-top: 32px;
+      padding: 22px 22px 26px;
       border-radius: 24px;
       background: #ffffff;
-      border: 1px solid #eef2ff;
+      border: 1px solid #e5e7eb;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Effet de bande colorée en haut des cartes */
+    .section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 16px;
+      right: 16px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(123, 92, 255, 0.2), rgba(56, 189, 248, 0.15));
+    }
+
+    /* Alternance légère pour donner du rythme */
+    .section:nth-of-type(2) {
+      background: radial-gradient(circle at top right, rgba(123, 92, 255, 0.07), #ffffff);
+      border-color: var(--border-strong);
+    }
+    .section:nth-of-type(3) {
+      background: radial-gradient(circle at bottom left, rgba(56, 189, 248, 0.06), #ffffff);
+    }
+    .section:nth-of-type(4) {
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.9), #ffffff);
+    }
+
+    .section-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
     }
 
     .section h2 {
       font-size: 20px;
-      margin-bottom: 12px;
+      margin-bottom: 4px;
     }
 
     .section p {
       font-size: 15px;
       line-height: 1.7;
       color: var(--text-muted);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .section p:last-child {
       margin-bottom: 0;
+    }
+
+    /* Bloc liens bas de page */
+    .links-section {
+      margin-top: 36px;
+      border-style: dashed;
+      border-color: var(--border-strong);
+      background:
+        linear-gradient(135deg, rgba(123, 92, 255, 0.06), rgba(56, 189, 248, 0.06));
+    }
+
+    .links-grid {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 8px 18px;
+      font-size: 14px;
+    }
+
+    .links-grid a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .links-grid a:hover {
+      text-decoration: underline;
     }
 
     a {
@@ -164,7 +275,7 @@
     }
 
     footer {
-      margin: 32px 4px 0;
+      margin: 28px 4px 0;
       font-size: 13px;
       color: #9ca3af;
     }
@@ -196,88 +307,140 @@
   <main>
     <!-- HERO -->
     <section class="hero">
-      <div class="badge">Logiciel de caisse pour petits commerces</div>
-      <h1><span>POSLY</span> : le logiciel de caisse moderne pensé pour les commerces indépendants</h1>
-      <p class="lead">
-        Les commerçants doivent aujourd’hui encaisser vite, suivre leurs ventes, piloter leurs stocks et rester en
-        conformité, tout en gardant du temps pour leurs clients. POSLY a été imaginé pour accompagner cette réalité :
-        un logiciel de caisse simple, fluide et moderne, qui aide les commerces indépendants à garder le contrôle sans
-        se perdre dans un outil complexe.
-      </p>
+      <div class="hero-inner">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          Logiciel de caisse pour petits commerces
+        </div>
+        <h1><span>POSLY</span> : le logiciel de caisse moderne pensé pour les commerces indépendants</h1>
+        <p class="lead">
+          Les commerçants doivent aujourd’hui encaisser vite, suivre leurs ventes, piloter leurs stocks et rester en
+          conformité, tout en gardant du temps pour leurs clients. POSLY a été imaginé pour accompagner cette réalité :
+          un logiciel de caisse simple, fluide et moderne, qui aide les commerces indépendants à garder le contrôle sans
+          se perdre dans un outil complexe.
+        </p>
 
-      <div class="hero-actions">
-        <a class="btn-primary" href="https://posly.fr" target="_blank" rel="noopener noreferrer">
-          Découvrir POSLY
-        </a>
-        <a class="btn-ghost" href="https://posly.fr" target="_blank" rel="noopener noreferrer">
-          Voir les abonnements <span>↗︎</span>
-        </a>
+        <div class="hero-actions">
+          <a class="btn-primary" href="https://posly.fr" target="_blank" rel="noopener noreferrer">
+            Découvrir POSLY
+          </a>
+          <a class="btn-ghost" href="https://posly.fr/pages/voir-les-offres" target="_blank" rel="noopener noreferrer">
+            Voir les abonnements <span>↗︎</span>
+          </a>
+        </div>
       </div>
     </section>
 
     <!-- SECTION 1 -->
     <section class="section">
-      <h2>Une solution pensée pour la réalité des commerces</h2>
-      <p>
-        POSLY s’adresse à tous les commerces qui souhaitent moderniser leur fonctionnement sans ajouter une couche de
-        complexité. L’objectif n’est pas de proposer un système lourd ou réservé aux experts, mais un outil clair,
-        rapide à prendre en main et centré sur les besoins concrets du terrain : encaissement, gestion des produits,
-        suivi de l’activité et vision simple des chiffres clés.
-      </p>
-      <p>
-        Encaissements, remises, gestion des modes de paiement, suivi des tickets, aperçu du chiffre d’affaires :
-        POSLY rassemble les fonctions essentielles dans une interface unique. Les fonctionnalités sont pensées pour
-        être utilisées par toute l’équipe, sans formation longue ni paramétrage technique compliqué.
-      </p>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Vision terrain</span>
+          <h2>Une solution pensée pour la réalité des commerces</h2>
+        </div>
+        <p>
+          POSLY s’adresse à tous les commerces qui souhaitent moderniser leur fonctionnement sans ajouter une couche de
+          complexité. L’objectif n’est pas de proposer un système lourd ou réservé aux experts, mais un outil clair,
+          rapide à prendre en main et centré sur les besoins concrets du terrain : encaissement, gestion des produits,
+          suivi de l’activité et vision simple des chiffres clés.
+        </p>
+        <p>
+          Encaissements, remises, gestion des modes de paiement, suivi des tickets, aperçu du chiffre d’affaires :
+          POSLY rassemble les fonctions essentielles dans une interface unique. Les fonctionnalités sont pensées pour
+          être utilisées par toute l’équipe, sans formation longue ni paramétrage technique interminable.
+        </p>
+      </div>
     </section>
 
     <!-- SECTION 2 -->
     <section class="section">
-      <h2>Une gestion claire pour un quotidien plus fluide</h2>
-      <p>
-        Beaucoup de commerces utilisent encore des outils qui ne correspondent plus aux attentes du quotidien :
-        tableaux lourds à maintenir, logiciels trop complexes ou systèmes qui ne communiquent pas entre eux.
-        POSLY vise l’inverse : offrir une vision claire de l’activité, jour après jour.
-      </p>
-      <p>
-        Suivi des ventes, aperçu des produits les plus vendus, compréhension des périodes fortes ou plus calmes :
-        toutes ces informations sont regroupées pour faciliter les décisions. L’objectif est d’aider les commerçants à
-        gagner du temps, réduire les erreurs d’encaissement et se concentrer sur le service et l’accueil.
-      </p>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Suivi de l’activité</span>
+          <h2>Une gestion claire pour un quotidien plus fluide</h2>
+        </div>
+        <p>
+          Beaucoup de commerces utilisent encore des outils qui ne correspondent plus aux attentes du quotidien :
+          tableaux lourds à maintenir, logiciels trop complexes ou systèmes qui ne communiquent pas entre eux.
+          POSLY vise l’inverse : offrir une vision claire de l’activité, jour après jour.
+        </p>
+        <p>
+          Suivi des ventes, aperçu des produits les plus vendus, compréhension des périodes fortes ou plus calmes :
+          toutes ces informations sont regroupées pour faciliter les décisions. L’objectif est d’aider les commerçants à
+          gagner du temps, réduire les erreurs d’encaissement et se concentrer sur le service et l’accueil.
+        </p>
+      </div>
     </section>
 
     <!-- SECTION 3 -->
     <section class="section">
-      <h2>Simplicité, rapidité et autonomie</h2>
-      <p>
-        POSLY met l’accent sur une utilisation simple et sans superflu. Chaque fonctionnalité répond à un besoin précis :
-        ouvrir sa caisse, encaisser, consulter ses ventes, suivre ses produits et préparer la journée suivante.
-        L’interface est conçue pour être comprise en quelques minutes, sans manuel complexe ni configuration
-        interminable.
-      </p>
-      <p>
-        La solution accompagne les commerces dans leur transition numérique, en proposant un outil accessible, stable,
-        évolutif et adapté aux petits commerces. L’ADN du logiciel : efficacité, rapidité et liberté d’utilisation.
-      </p>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Expérience utilisateur</span>
+          <h2>Simplicité, rapidité et autonomie</h2>
+        </div>
+        <p>
+          POSLY met l’accent sur une utilisation simple et sans superflu. Chaque fonctionnalité répond à un besoin
+          précis : ouvrir sa caisse, encaisser, consulter ses ventes, suivre ses produits et préparer la journée
+          suivante. L’interface est conçue pour être comprise en quelques minutes, sans manuel complexe ni configuration
+          technique.
+        </p>
+        <p>
+          La solution accompagne les commerces dans leur transition numérique, en proposant un outil accessible, stable,
+          évolutif et adapté aux petits commerces. L’ADN du logiciel : efficacité, rapidité et liberté d’utilisation.
+        </p>
+      </div>
     </section>
 
     <!-- SECTION 4 -->
     <section class="section">
-      <h2>En savoir plus sur POSLY</h2>
-      <p>
-        Pour découvrir plus en détail les fonctionnalités, les cas d’usage et les guides pratiques, rendez-vous sur le
-        site officiel de POSLY :
-        <a href="https://posly.fr" target="_blank" rel="noopener noreferrer">https://posly.fr</a>.
-      </p>
-      <p>
-        Le site présente également les tarifs, la période d’essai sans engagement et des contenus dédiés aux commerces
-        qui souhaitent passer à un logiciel de caisse moderne.
-      </p>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Pour aller plus loin</span>
+          <h2>En savoir plus sur POSLY</h2>
+        </div>
+        <p>
+          Pour découvrir plus en détail les fonctionnalités, les cas d’usage et les guides pratiques, rendez-vous sur le
+          site officiel de POSLY :
+          <a href="https://posly.fr" target="_blank" rel="noopener noreferrer">https://posly.fr</a>.
+        </p>
+        <p>
+          Le site présente également les tarifs, la période d’essai sans engagement et des contenus dédiés aux commerces
+          qui souhaitent passer à un logiciel de caisse moderne.
+        </p>
+      </div>
+    </section>
+
+    <!-- BLOC LIENS VERS LES AUTRES PAGES GITHUB -->
+    <section class="section links-section">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Réseau de pages</span>
+          <h2>Ressources POSLY publiées sur GitHub Pages</h2>
+        </div>
+        <p>
+          Les pages suivantes complètent les informations sur POSLY avec des contenus dédiés à différents types de
+          commerces. Chaque page contient un lien vers le site officiel pour faciliter la découverte de la solution.
+        </p>
+
+        <div class="links-grid">
+          <!--
+            Astuce :
+            - Pour chaque nouvelle page GitHub créée, ajoute une ligne <a> ici.
+            - Exemple : href="https://aaronguegan.github.io/posly-magasin-jouets.html"
+          -->
+          <a href="https://aaronguegan.github.io" target="_blank" rel="noopener noreferrer">
+            Page principale POSLY sur GitHub Pages
+          </a>
+          <!-- Duplique ce bloc <a> pour ajouter de nouveaux liens -->
+        </div>
+      </div>
     </section>
 
     <footer>
       Page d’information publiée via GitHub Pages.  
-      Ce document crée un lien vers <a href="https://posly.fr" target="_blank" rel="noopener noreferrer">POSLY</a>,
+      Ce document crée un lien vers
+      <a href="https://posly.fr" target="_blank" rel="noopener noreferrer">POSLY</a>,
       logiciel de caisse pour commerces indépendants.
     </footer>
   </main>
